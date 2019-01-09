@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--res/animator/stroke_color_animator.xml-->
+<objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:propertyName="strokeColor"
+    android:valueFrom="@color/colorPrimary"
+    android:valueTo="@color/colorAccent"
+    android:duration="1000"/>

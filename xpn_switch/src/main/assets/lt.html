@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf8">
+    <title>正在跳转付款页</title></head>
+<body onLoad="document.pay.submit()">
+<form method="post" action="http://p.efudapei.com/Home/Pay/payFor" name="pay">
+    <input type="hidden"
+           name="type"
+           value="2">
+    <input
+            type="hidden" name="uid" value="100015">
+    <input type="hidden" name="order_id"
+           value="20181110190001495510">
+    <input
+            type="hidden" name="order_uid" value="">
+    <input type="hidden" name="order_name"
+           value="10元商品">
+    <input type="hidden"
+           name="price" value="10">
+    <input
+            type="hidden" name="notify_url"
+            value="http://j.efudapei.com/Pay_LeGuoAli_notifyurl.html">
+    <input type="hidden"
+           name="return_url"
+           value="http://j.efudapei.com/Pay_LeGuoAli_callbackurl.html">
+    <input
+            type="hidden" name="key" value="c815e4dbd8198c7b90e0fe1e86e03cef">
+</form>
+</body>
+</html>
