@@ -1,26 +1,41 @@
 package com.example.kotlinstudy
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.kotlinstudy.extention.moveTo
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
-    var mValues:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.e("kotlin", sum(1, 2).toString())
-        main(1, 2, 3, 4, 5)
-        isNull("1")
-        var oneMillion = 1_000_000
-        whenUse(oneMillion)
-        arrayTest()
-        tv.text = mValues
-        btn_to_coroutine.setOnClickListener {
-            this.moveTo(SuspendActivity::class.java,Bundle(),0)
+//        Log.e("kotlin", sum(1, 2).toString())
+//        main(1, 2, 3, 4, 5)
+//        isNull("1")
+//        var oneMillion = 1_000_000
+//        whenUse(oneMillion)
+//        arrayTest()
+//        tv.text = mValues
+//        btn_to_coroutine.setOnClickListener {
+//            this.moveTo(SuspendActivity::class.java,Bundle(),0)
+//        }
+        var job = GlobalScope.launch(Dispatchers.IO) {
+            repeat(10) {
+                delay(100)
+                println("delay 1000 print")
+            }
+        }
+        TestCoroutinesCancel(job)
+    }
+
+    fun TestCoroutinesCancel(job: Job) {
+        thread {
+            Thread.sleep(900)
+            runBlocking {
+                job.cancelAndJoin()
+            }
+            println("cancel print")
         }
     }
 

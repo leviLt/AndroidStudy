@@ -17,19 +17,23 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
 public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     List<String> titles;
     ViewPager viewPager;
     List<Fragment> fragments;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tabLayout = findViewById(R.id.tablayout);
+//        tabLayout = findViewById(R.id.tablayout);
         viewPager = findViewById(R.id.viewpager);
-        setTablayout();
-        modifyTablayout();
+        tabLayout = null;
+
+//        setTablayout();
+//        modifyTablayout();
     }
 
     private void modifyTablayout() {
