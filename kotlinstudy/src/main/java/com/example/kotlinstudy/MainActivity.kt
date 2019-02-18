@@ -1,8 +1,12 @@
 package com.example.kotlinstudy
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import com.example.kotlinstudy.callback.CallbackTestActivity
+import com.example.kotlinstudy.extention.moveTo
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import kotlin.concurrent.thread
 
@@ -20,14 +24,18 @@ class MainActivity : AppCompatActivity() {
 //        btn_to_coroutine.setOnClickListener {
 //            this.moveTo(SuspendActivity::class.java,Bundle(),0)
 //        }
-        var job = GlobalScope.launch(Dispatchers.IO) {
-            repeat(10) {
-                delay(100)
-                println("delay 1000 print")
-            }
+//        var job = GlobalScope.launch(Dispatchers.IO) {
+//            repeat(10) {
+//                delay(100)
+//                println("delay 1000 print")
+//            }
+//        }
+//        TestCoroutinesCancel(job)
+        btnCallback.setOnClickListener{
+            this@MainActivity.moveTo(CallbackTestActivity::class.java)
         }
-        TestCoroutinesCancel(job)
     }
+
 
     fun TestCoroutinesCancel(job: Job) {
         thread {
