@@ -17,7 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SuspendActivity" />
+        <activity android:name=".SuspendActivity"
+            android:label="CoroutinePerformance"/>
+        <activity android:name=".TestCoroutinePerformanceActivity"
+            android:label="CoroutinePerformance"/>
     </application>
 
 </manifest>
