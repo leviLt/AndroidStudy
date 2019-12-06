@@ -28,12 +28,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        tabLayout = findViewById(R.id.tablayout);
+        tabLayout = findViewById(R.id.tablayout);
         viewPager = findViewById(R.id.viewpager);
-        tabLayout = null;
-
-//        setTablayout();
-//        modifyTablayout();
+        setTablayout();
+        modifyTablayout();
     }
 
     private void modifyTablayout() {
@@ -57,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // 设置tab左右间距,注意这里不能使用Padding,因为源码中线的宽度是根据tabView的宽度来设置的
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tabView.getLayoutParams();
-                params.width = width;
+//                params.width = width;
                 params.leftMargin = 10;
                 params.rightMargin = 10;
                 tabView.setLayoutParams(params);
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private void setTablayout() {
         titles = new ArrayList<>();
         fragments = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             titles.add("标题" + i);
             fragments.add(BlankFragment.newInstance("标题" + i));
         }
