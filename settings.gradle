@@ -1,1 +1,1 @@
-include ':app', ':tablayout', ':bottomnavigationbar', ':svg', ':snackbar', ':launchMode', ':xpn_switch', ':plugin', ':cavans3d', ':kotlinstudy', ':beating', ':rvselectiontracker'
+include ':app', ':tablayout', ':bottomnavigationbar', ':svg', ':snackbar', ':launchMode', ':xpn_switch', ':plugin', ':cavans3d', ':kotlinstudy', ':beating', ':rvselectiontracker', ':magicindicator'

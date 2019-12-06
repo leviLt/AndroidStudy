@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/cavans3d" />
             <option value="$PROJECT_DIR$/kotlinstudy" />
             <option value="$PROJECT_DIR$/launchMode" />
+            <option value="$PROJECT_DIR$/magicindicator" />
             <option value="$PROJECT_DIR$/plugin" />
             <option value="$PROJECT_DIR$/rvselectiontracker" />
             <option value="$PROJECT_DIR$/snackbar" />
@@ -23,6 +24,7 @@
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>
