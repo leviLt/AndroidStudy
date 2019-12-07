@@ -17,6 +17,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNav
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.WrapPagerIndicator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
 
 class MainActivity : AppCompatActivity() {
@@ -29,11 +30,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        val commonNavigator = CommonNavigator(this)
-        commonNavigator.adapter = object : CommonNavigatorAdapter() {
+        //titlle
+        val titleCommonNavigatorAdapter = CommonNavigator(this)
+        titleCommonNavigatorAdapter.isAdjustMode=true
+        titleCommonNavigatorAdapter.adapter = object : CommonNavigatorAdapter() {
             override fun getTitleView(context: Context?, index: Int): IPagerTitleView {
                 val titleView = TitleView(this@MainActivity)
-                titleView.normalColor = ContextCompat.getColor(this@MainActivity, R.color.colorAccent)
+                titleView.normalColor = ContextCompat.getColor(this@MainActivity, android.R.color.white)
                 titleView.selectedColor = ContextCompat.getColor(this@MainActivity, R.color.colorPrimary)
                 titleView.text = titles[index]
                 titleView.setOnClickListener {
@@ -54,11 +57,40 @@ class MainActivity : AppCompatActivity() {
                 return indicator
             }
         }
-        tabLayout.navigator = commonNavigator
-        viewPager.adapter = FragmentAdapter(supportFragmentManager)
-        ViewPagerHelper.bind(tabLayout, viewPager)
+        tabLayout_title.navigator = titleCommonNavigatorAdapter
+        ViewPagerHelper.bind(tabLayout_title, viewPager)
 
-        val fragmentContainerHelper = FragmentContainerHelper(tabLayout)
+        //indicator
+        val indicatorCommonNavigator = CommonNavigator(this)
+        indicatorCommonNavigator.isAdjustMode=true
+        indicatorCommonNavigator.adapter = object : CommonNavigatorAdapter() {
+            override fun getTitleView(context: Context?, index: Int): IPagerTitleView {
+                val titleView = SimplePagerTitleView(this@MainActivity)
+                titleView.normalColor = ContextCompat.getColor(this@MainActivity, android.R.color.transparent)
+                titleView.selectedColor = ContextCompat.getColor(this@MainActivity, android.R.color.transparent)
+                titleView.text = titles[index]
+                titleView.setOnClickListener {
+                    viewPager.currentItem = index
+                }
+                return titleView
+            }
+
+            override fun getCount(): Int {
+                return titles.size
+            }
+
+            override fun getIndicator(context: Context?): IPagerIndicator {
+                var indicator = LinePagerIndicator(this@MainActivity)
+                indicator.lineWidth = 20.toPX(this@MainActivity).toFloat()
+                indicator.lineHeight = 1.toPX(this@MainActivity).toFloat()
+                indicator.mode = LinePagerIndicator.MODE_EXACTLY
+                return indicator
+            }
+        }
+        tabLayout_indicator.navigator = indicatorCommonNavigator
+        viewPager.adapter = FragmentAdapter(supportFragmentManager)
+        ViewPagerHelper.bind(tabLayout_indicator, viewPager)
+        val fragmentContainerHelper = FragmentContainerHelper(tabLayout_indicator)
         fragmentContainerHelper.setInterpolator(OvershootInterpolator(2.0f))
         fragmentContainerHelper.setDuration(300)
         viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
@@ -66,7 +98,6 @@ class MainActivity : AppCompatActivity() {
                 fragmentContainerHelper.handlePageSelected(position)
             }
         })
-
     }
 
     inner class FragmentAdapter constructor(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
@@ -84,7 +115,17 @@ class MainActivity : AppCompatActivity() {
     inner class TitleView(context: Context) : SimplePagerTitleView(context) {
         override fun onSelected(index: Int, totalCount: Int) {
             super.onSelected(index, totalCount)
-            setBackgroundResource(R.drawable.select_bg)
+            when(index){
+                0->{
+                    setBackgroundResource(R.drawable.title_left_bg)
+                }
+                2->{
+                    setBackgroundResource(R.drawable.title_right_bg)
+                }
+                else->{
+                    setBackgroundResource(R.drawable.title_center_bg)
+                }
+            }
         }
 
         override fun onDeselected(index: Int, totalCount: Int) {
