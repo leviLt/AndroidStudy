@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_magicindicator.*
 
 /**
@@ -15,26 +17,46 @@ import kotlinx.android.synthetic.main.fragment_magicindicator.*
  */
 class MagicindicatorFragment private constructor() : Fragment() {
 
-    var title: String = ""
+
+    private lateinit var itemTouch: ItemTouchHelper
+    var list = mutableListOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14")
+
+    var diffResult: DiffUtil.DiffResult? = null
+
 
     companion object {
         /**
          * 创建
          */
-        fun newInstance(title: String): Fragment {
-            val fragment = MagicindicatorFragment()
-            fragment.title = title
-            return fragment
+        fun newInstance(): Fragment {
+            return MagicindicatorFragment()
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view: View = inflater.inflate(R.layout.fragment_magicindicator, container, false)
-        initView(view)
-        return view
+        return inflater.inflate(R.layout.fragment_magicindicator, container, false)
     }
 
-    private fun initView(view: View) {
-        view.findViewById<TextView>(R.id.tv).text = title
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initView()
     }
+
+    private fun initView() {
+        val adapter = ListAdapter(list, context)
+        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        linearLayoutManager.isSmoothScrollbarEnabled = true
+        recycler_view.layoutManager = linearLayoutManager
+        recycler_view.adapter = adapter
+        adapter.setOnClickListener {
+            recycler_view.scrollToPosition(0)
+        }
+//        var callback = SimpleItemTouch { from: Int, to: Int ->
+//            adapter.movePositionToFirst(from, to)
+//        }
+//
+//        itemTouch = ItemTouchHelper(callback)
+//        itemTouch.attachToRecyclerView(recycler_view)
+    }
+
 }
