@@ -21,7 +21,6 @@ class MagicindicatorFragment private constructor() : Fragment() {
     private lateinit var itemTouch: ItemTouchHelper
     var list = mutableListOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14")
 
-    var diffResult: DiffUtil.DiffResult? = null
 
 
     companion object {
