@@ -133,7 +133,6 @@ class MainActivity : AppCompatActivity() {
         }
         tabLayout_indicator_2.navigator = indicator2
         ViewPagerHelper.bind(tabLayout_indicator_2, viewPager)
-
         val fragmentContainerHelper = FragmentContainerHelper(tabLayout_indicator_2)
         fragmentContainerHelper.setInterpolator(OvershootInterpolator(2.0f))
         fragmentContainerHelper.setDuration(300)
